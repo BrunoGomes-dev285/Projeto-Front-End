@@ -1,0 +1,212 @@
+/* ==========================================================================
+   1. Regras Globais & Navbar
+   ========================================================================== */
+.navbar {
+  background: linear-gradient(90deg, #0d47a1 0%, #1565c0 100%) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   2. TELA LAB 2: Cenário Iluminado (#cenario)
+   ========================================================================== */
+#cenario {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+  overflow: hidden;
+  border-radius: 0 0 8px 8px;
+}
+
+#cenario .sol {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 42px;
+  opacity: 0.8;
+  z-index: 1;
+  animation: piscarSol 2s infinite;
+}
+
+#cenario .nuvens {
+  position: absolute;
+  top: 30px;
+  left: 10%;
+  font-size: 32px;
+  opacity: 0.7;
+  z-index: 1;
+  animation: flutuarNuvens 8s infinite linear;
+}
+
+#cenario .arvores {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  font-size: 35px;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0.7;
+  user-select: none;
+  z-index: 1;
+}
+
+#cenario .estrada {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #333;
+  z-index: 2;
+  overflow: hidden;
+}
+
+#cenario .estrada::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD700 0px,
+    #FFD700 25px,
+    transparent 25px,
+    transparent 50px
+  );
+  transform: translateY(-50%);
+  animation: moverEstrada 0.4s linear infinite;
+  will-change: transform;
+}
+
+#cenario .veiculo {
+  position: absolute;
+  bottom: 12px;
+  left: 30%;
+  font-size: 45px;
+  line-height: 1;
+  z-index: 3;
+  animation: trepidarLab 0.12s linear infinite alternate;
+}
+
+/* ==========================================================================
+   3. TELA NOC: Painel Dark Mode (.cenario)
+   ========================================================================== */
+.glass-card {
+  background: rgba(25, 30, 36, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+}
+
+.cenario {
+  position: relative;
+  height: 110px;
+  background-color: rgba(135, 206, 235, 0.05);
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  border-bottom: 2px solid #555;
+}
+
+.cenario .estrada {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 25px;
+  background-color: #333;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cenario .estrada::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 200%;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFD700 0px,
+    #FFD700 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  transform: translateY(-50%);
+  animation: moverEstrada 0.4s linear infinite;
+  will-change: transform;
+}
+
+.cenario .veiculo {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  font-size: 2.8rem;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.cenario .veiculo.animado {
+  animation: trepidarNOC 0.15s linear infinite alternate;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), 
+                    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   4. Animações Keyframes Seguras
+   ========================================================================== */
+@keyframes moverEstrada {
+  0% { transform: translateY(-50%) translateX(0); }
+  100% { transform: translateY(-50%) translateX(-50px); }
+}
+
+/* Trepidação exclusiva do Lab 2 */
+@keyframes trepidarLab {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-2px); }
+}
+
+/* Trepidação exclusiva do NOC Dark Mode (preserva o translateX(-50%)) */
+@keyframes trepidarNOC {
+  from { transform: translateX(-50%) translateY(0px); }
+  to { transform: translateX(-50%) translateY(-3px); }
+}
+
+@keyframes flutuarNuvens {
+  0% { left: -15%; }
+  100% { left: 105%; }
+}
+
+@keyframes piscarSol {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  #cenario { height: 200px; }
+  #cenario .arvores { font-size: 28px; bottom: 55px; }
+  #cenario .veiculo { font-size: 34px; bottom: 8px; }
+}
