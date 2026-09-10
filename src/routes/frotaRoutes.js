@@ -5,7 +5,7 @@ const frotaController = require('../controllers/frotaController');
 router.get('/', frotaController.listar);
 router.get('/:id', frotaController.buscarDetalhes);
 router.post('/', frotaController.registrar);
-router.patch('/:id', frotaController.atualizarTelemetria); // Recomendado: PATCH para atualizações parciais
+router.put('/:id', frotaController.atualizarTelemetria);
 router.delete('/:id', frotaController.remover);
 
 module.exports = router;

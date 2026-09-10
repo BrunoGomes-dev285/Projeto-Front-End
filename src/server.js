@@ -1,11 +1,14 @@
 const express = require('express');
-const router = express.Router();
-const frotaController = require('../controllers/frotaController');
+const cors = require('cors');
+const frotaRoutes = require('./routes/frotaRoutes');
 
-router.get('/', frotaController.listar);
-router.get('/:id', frotaController.buscarDetalhes);
-router.post('/', frotaController.registrar);
-router.patch('/:id', frotaController.atualizarTelemetria); // Recomendado: PATCH para atualizações parciais
-router.delete('/:id', frotaController.remover);
+const app = express();
+const PORT = 3000;
 
-module.exports = router;
+app.use(cors());
+app.use(express.json());
+app.use('/api/frota', frotaRoutes);
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor operando em http://localhost:${PORT}`);
+});
